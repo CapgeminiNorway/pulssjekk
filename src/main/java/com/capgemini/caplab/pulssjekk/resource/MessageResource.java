@@ -1,16 +1,11 @@
-package com.capgemini.caplab.pulssjekk.recource;
+package com.capgemini.caplab.pulssjekk.resource;
 import com.capgemini.caplab.pulssjekk.model.Message;
 import com.capgemini.caplab.pulssjekk.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping(value="/api/v1/messages")
@@ -28,8 +23,9 @@ public class MessageResource {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<Message> getObjectActionStatus(@PathVariable ("id") Long id) {
-        return new ResponseEntity<>(messageRepository.getOne(id), HttpStatus.NOT_IMPLEMENTED);
+    public Message getObjectActionStatus(@PathVariable ("id") Long id) {
+        Message ref =  messageRepository.getOne(id);
+        return new Message(ref.getId(), ref.getContent());
     }
 
 /*
