@@ -11,4 +11,5 @@ public class PulssjekkApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PulssjekkApplication.class, args);
 	}
+
 }
