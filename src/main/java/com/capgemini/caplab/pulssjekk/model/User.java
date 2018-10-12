@@ -14,6 +14,13 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    public User(){}
+
+    public User(Long id, String email) {
+        this.id = id;
+        this.email = email;
+    }
+
     public Long getId() {
         return id;
     }

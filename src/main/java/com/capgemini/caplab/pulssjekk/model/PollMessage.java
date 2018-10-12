@@ -1,10 +1,11 @@
 package com.capgemini.caplab.pulssjekk.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name="message")
-public class Message {
+@Table(name="pollMessage")
+public class PollMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,9 +15,13 @@ public class Message {
     @Column(name="content")
     private String content;
 
-    public Message() { }
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = PollOption.class, cascade = CascadeType.ALL)
+    private List<PollOption> pollOptions;
 
-    public Message(Long id, String content) {
+
+    public PollMessage() { }
+
+    public PollMessage(Long id, String content) {
         this.id = id;
         this.content = content;
     }
@@ -25,15 +30,8 @@ public class Message {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getContent() {
         return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 }
