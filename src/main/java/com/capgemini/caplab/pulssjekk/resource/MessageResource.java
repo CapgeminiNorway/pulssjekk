@@ -28,34 +28,6 @@ public class MessageResource {
         return new Message(ref.getId(), ref.getContent());
     }
 
-/*
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<Message> getObject(@PathVariable ("id") Long id) {
-        return new ResponseEntity<>(messageRepository.getReference(Message.class, id), HttpStatus.NOT_IMPLEMENTED);
-    }
-
-*/
-
-/*
-    @RequestMapping(value = "/objects/{oid}/actions/{aid}", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
-    public ResponseEntity<PropertyValue> executeObjectAction(@PathVariable UUID oid, @PathVariable String aid) {
-        return new ResponseEntity<>(new PropertyValue(), HttpStatus.NOT_IMPLEMENTED);
-    }
-
-
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public Message get(@PathVariable("id") Long id) {
-        return messageRepository.getOne(id);
-    }
-
-
-
-
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public Message getMessage(@PathVariable ("id") Long id){
-        return
-    }
-*/
     @PostMapping(value = "/")
     public Message persist(@RequestBody final Message message){
         return messageRepository.save(message);
