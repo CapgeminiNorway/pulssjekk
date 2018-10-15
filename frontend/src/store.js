@@ -5,6 +5,8 @@ const LOGIN = "LOGIN";
 
 const SELECTROLE = "SELECTROLE";
 
+const QUESTION = "QUESTION";
+
 export function roleSelect(role) {
   return {
     type: SELECTROLE,
@@ -19,9 +21,20 @@ export function submitLogin(email) {
   };
 }
 
+export function sendQuestion(question) {
+  return {
+    type: QUESTION,
+    payload: question
+  };
+}
+
 // Reducers
 
-const rootReducer = combineReducers({ loginReducer, roleSelectReducer });
+const rootReducer = combineReducers({
+  loginReducer,
+  roleSelectReducer,
+  sendQuestionReducer
+});
 
 function loginReducer(state = { login: "" }, action) {
   switch (action.type) {
@@ -36,6 +49,15 @@ function roleSelectReducer(state = { role: "" }, action) {
   switch (action.type) {
     case SELECTROLE:
       return { role: action.payload };
+    default:
+      return state;
+  }
+}
+
+function sendQuestionReducer(state = { question: "" }, action) {
+  switch (action.type) {
+    case QUESTION:
+      return { question: action.payload };
     default:
       return state;
   }

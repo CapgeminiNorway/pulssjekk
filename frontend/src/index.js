@@ -8,6 +8,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./index.css";
 import RoleSelect from "./RoleSelect";
+import Admin from "./Admin";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route component={App} exact path="/" />
         <Route component={Login} path="/login" />
         <Route component={RoleSelect} path="/role_select" />
+        <Route component={Admin} path="/admin" />
       </div>
     </Router>
   </Provider>,
