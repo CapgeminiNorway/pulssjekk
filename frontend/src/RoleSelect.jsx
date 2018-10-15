@@ -9,27 +9,30 @@ class RoleSelect extends Component {
     this.state = {
       role: ""
     };
-    this.adminClicked = this.adminClicked.bind(this);
-    this.userClicked = this.userClicked.bind(this);
   }
-  adminClicked(event) {
+  buttonClicked = event => {
     event.preventDefault();
-    this.props.roleSelect("admin");
-  }
-
-  userClicked(event) {
-    event.preventDefault();
-    this.props.roleSelect("user");
-  }
+    this.props.roleSelect(event.target.name);
+  };
 
   render() {
     return (
       <div className="roleSelect">
         <form>
-          <button color="primary" className="px-30" onClick={this.adminClicked}>
+          <button
+            color="primary"
+            name="admin"
+            className="px-30"
+            onClick={this.buttonClicked}
+          >
             Admin
           </button>
-          <button color="primary" className="px-30" onClick={this.userClicked}>
+          <button
+            color="primary"
+            name="user"
+            className="px-30"
+            onClick={this.buttonClicked}
+          >
             User
           </button>
         </form>
@@ -41,7 +44,11 @@ class RoleSelect extends Component {
 function mapDispacthClickToProps(dispatch, props) {
   return {
     roleSelect: role => {
-      props.history.push("/admin");
+      if (role === "user") {
+        props.history.push("/user");
+      } else if (role === "admin") {
+        props.history.push("/admin");
+      }
       dispatch(roleSelect(role));
     }
   };
