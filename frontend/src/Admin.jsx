@@ -14,6 +14,16 @@ class Admin extends Component {
     event.preventDefault();
     const question = this.state.question;
     this.props.sendQuestion(question);
+
+    fetch("/api/v1/messages/", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify({ content: this.textInput.value })
+    });
+
     this.textInput.value = "";
     window.alert(`Du har send spørsmålet:\n${(event, null, question)}`);
   };
