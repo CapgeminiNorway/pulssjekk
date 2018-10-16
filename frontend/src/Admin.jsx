@@ -12,7 +12,10 @@ class Admin extends Component {
   }
   sendClicked = event => {
     event.preventDefault();
-    this.props.sendQuestion(this.state.question);
+    const question = this.state.question;
+    this.props.sendQuestion(question);
+    this.textInput.value = "";
+    window.alert(`Du har send spørsmålet:\n${(event, null, question)}`);
   };
 
   onInputShow = event => {
@@ -24,6 +27,8 @@ class Admin extends Component {
       <div className="admin">
         <form>
           <input
+            ref={ref => (this.textInput = ref)}
+            id="textInput"
             type="text"
             onChange={this.onInputShow}
             placeholder="Skriv din spørsmål"
