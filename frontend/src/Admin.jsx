@@ -15,7 +15,7 @@ class Admin extends Component {
     const question = this.state.question;
     this.props.sendQuestion(question);
 
-    fetch("/api/v1/messages/", {
+    fetch("/api/v1/polls", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -45,6 +45,14 @@ class Admin extends Component {
           />
           <br />
           <input type="submit" value="Send" onClick={this.sendClicked} />
+          <button
+            color="primary"
+            name="showMessages"
+            className="px-30"
+            onClick={this.buttonClicked}
+          >
+            Sendte spørsmål
+          </button>
         </form>
       </div>
     );
