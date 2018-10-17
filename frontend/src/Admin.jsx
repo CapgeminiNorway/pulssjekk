@@ -21,7 +21,7 @@ class Admin extends Component {
         "Content-Type": "application/json"
       },
       method: "POST",
-      body: JSON.stringify({ content: this.textInput.value })
+      body: JSON.stringify({ question: this.textInput.value })
     });
 
     this.textInput.value = "";

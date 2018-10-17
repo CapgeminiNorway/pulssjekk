@@ -33,14 +33,6 @@ class Login extends Component {
           />
           <br />
           <input type="submit" value="Logg inn" onClick={this.loginClicked} />
-          <button
-            color="primary"
-            name="showMessages"
-            className="px-30"
-            onClick={this.buttonClicked}
-          >
-            Sendte spørsmål
-          </button>
         </form>
       </div>
     );
