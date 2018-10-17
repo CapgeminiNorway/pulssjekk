@@ -4,34 +4,36 @@ package com.capgemini.caplab.pulssjekk.resource;
 import com.capgemini.caplab.pulssjekk.model.User;
 import com.capgemini.caplab.pulssjekk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping(value="/api/v1/users")
+@RequestMapping(value = "/api/v1/users")
 public class UserResource {
-
 
     @Autowired
     UserRepository userRepository;
 
-
-    @GetMapping(value = "/all")
-    public List<User> getAll() {
-        return userRepository.findAll();
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> getOne(@PathVariable("id") Long id) {
+        Optional<User> ref = userRepository.findById(id);
+        return ResponseEntity.of(ref);
     }
 
+    @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> save(@RequestBody final User user) throws URISyntaxException {
+        User body = userRepository.save(user);
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public User getObjectActionStatus(@PathVariable("id") Long id) {
-        User ref =  userRepository.getOne(id);
-        return new User(ref.getId(), ref.getEmail());
+        return ResponseEntity.created(new URI("/api/v1/users/" + user.getId()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(body);
     }
 
-    @PostMapping(value = "/")
-    public User persist(@RequestBody final User user){
-        return userRepository.save(user);
-    }
 }
 
