@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { sendQuestion } from "./store";
 import { withRouter } from "react-router-dom";
-
+import "./bootstrap.min.css";
+import "./admin.css";
 class Admin extends Component {
   constructor(props) {
     super(props);
@@ -34,27 +35,34 @@ class Admin extends Component {
 
   render() {
     return (
-      <div className="admin">
-        <form>
-          <input
-            ref={ref => (this.textInput = ref)}
-            id="textInput"
-            type="text"
-            onChange={this.onInputShow}
-            placeholder="Skriv din spørsmål"
-          />
-          <br />
-          <input type="submit" value="Send" onClick={this.sendClicked} />
-          <button
-            color="primary"
-            name="showMessages"
-            className="px-30"
-            onClick={this.buttonClicked}
-          >
-            Sendte spørsmål
-          </button>
-        </form>
-      </div>
+      <React.Fragment>
+        <div className="container">
+          <form>
+            <textarea
+              className="noresize"
+              ref={ref => (this.textInput = ref)}
+              id="textInput"
+              cols="50"
+              rows="2"
+              type="text"
+              onChange={this.onInputShow}
+              placeholder="Skriv din spørsmål"
+            />
+            <br />
+            <input type="submit" value="Send" onClick={this.sendClicked} />
+          </form>
+        </div>
+        <div className="container">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Spørsmål</th>
+                <th>Svar</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </React.Fragment>
     );
   }
 }
