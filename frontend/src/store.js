@@ -7,7 +7,6 @@ const LOGIN = "LOGIN";
 
 const SELECTROLE = "SELECTROLE";
 
-const QUESTION_ID_RECEIVED = "QUESTION_ID_RECEIVED";
 const SEND_QUESTION = "SEND_QUESTION";
 
 export function roleSelect(role) {
@@ -27,13 +26,6 @@ export function submitLogin(email) {
 export function sendQuestion(question) {
   return {
     type: SEND_QUESTION,
-    payload: question
-  };
-}
-
-export function questionIdReceived(question) {
-  return {
-    type: QUESTION_ID_RECEIVED,
     payload: question
   };
 }
@@ -72,14 +64,6 @@ function questionReducer(state = initialState, action) {
       return {
         ...state,
         questions: [...state.questions, action.payload]
-      };
-    case QUESTION_ID_RECEIVED:
-      const question = action.payload;
-      const questions = [...state.questions];
-      questions[question.id].confirmed = true;
-      return {
-        ...state,
-        questions
       };
     default:
       return state;

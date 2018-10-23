@@ -38,7 +38,7 @@ public class PollResource {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(saved.getId()).toUri();
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(saved);
     }
 
     @DeleteMapping(value = "/{id}")
