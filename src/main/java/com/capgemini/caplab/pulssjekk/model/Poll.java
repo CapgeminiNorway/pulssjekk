@@ -14,6 +14,9 @@ public class Poll {
     @Column(name="question")
     private String question;
 
+    @Column(name = "created_by")
+    private String createdBy;
+
     public Long getId() {
         return id;
     }
@@ -30,4 +33,11 @@ public class Poll {
         this.question = question;
     }
 
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
 }
