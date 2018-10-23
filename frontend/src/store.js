@@ -1,11 +1,13 @@
 import { createStore, combineReducers } from "redux";
-
+const initialState = {
+  questions: []
+};
 // Actions
 const LOGIN = "LOGIN";
 
 const SELECTROLE = "SELECTROLE";
 
-const QUESTION = "QUESTION";
+const SEND_QUESTION = "SEND_QUESTION";
 
 export function roleSelect(role) {
   return {
@@ -23,19 +25,21 @@ export function submitLogin(email) {
 
 export function sendQuestion(question) {
   return {
-    type: QUESTION,
+    type: SEND_QUESTION,
     payload: question
   };
 }
 
 // Reducers
-
+/*
 const rootReducer = combineReducers({
-  loginReducer,
-  roleSelectReducer,
+  //loginReducer,
+  //roleSelectReducer,
   sendQuestionReducer
 });
 
+*/
+/*
 function loginReducer(state = { login: "" }, action) {
   switch (action.type) {
     case LOGIN:
@@ -53,17 +57,20 @@ function roleSelectReducer(state = { role: "" }, action) {
       return state;
   }
 }
-
-function sendQuestionReducer(state = { question: "" }, action) {
+*/
+function questionReducer(state = initialState, action) {
   switch (action.type) {
-    case QUESTION:
-      return { question: action.payload };
+    case SEND_QUESTION:
+      return {
+        ...state,
+        questions: [...state.questions, action.payload]
+      };
     default:
       return state;
   }
 }
 
 export const store = createStore(
-  rootReducer,
+  questionReducer,
   window.devToolsExtension ? window.devToolsExtension() : undefined // Connect to Chrome plugin if possible
 );
