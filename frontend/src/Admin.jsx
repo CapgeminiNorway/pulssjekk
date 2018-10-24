@@ -19,7 +19,7 @@ class Admin extends Component {
     fetch("/api/v1/polls", {
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       method: "POST",
       body: JSON.stringify({ question: this.textInput.value })

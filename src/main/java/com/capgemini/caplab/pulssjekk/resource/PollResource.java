@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
@@ -37,9 +38,10 @@ public class PollResource {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Poll poll) {
-        Principal username = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        poll.setCreatedBy(username.getName());
+    public ResponseEntity<?> save(@RequestBody Poll poll, Authentication authentication) {
+        System.out.println(authentication);
+        poll.setCreatedBy(authentication.getName());
+
         Poll saved = pollRepository.save(poll);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")

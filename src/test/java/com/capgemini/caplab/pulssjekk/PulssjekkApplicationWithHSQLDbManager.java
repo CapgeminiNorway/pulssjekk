@@ -2,15 +2,11 @@ package com.capgemini.caplab.pulssjekk;
 
 import org.hsqldb.util.DatabaseManagerSwing;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-
 public class PulssjekkApplicationWithHSQLDbManager {
 
     public static void main(String[] args) {
         DatabaseManagerSwing.main(new String[]{"--url", "jdbc:hsqldb:mem:testdb", "--user", "testuser", "--password", ""});
-        PulssjekkApplication.main(args);
+        PulssjekkApplication.main(new String[]{"--debug"});
         //setupTestDb();
     }
 /*
