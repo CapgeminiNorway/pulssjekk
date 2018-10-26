@@ -1,6 +1,9 @@
 package com.capgemini.caplab.pulssjekk.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="poll")
@@ -16,6 +19,14 @@ public class Poll {
 
     @Column(name = "created_by")
     private String createdBy;
+
+    @Transient
+    @JsonInclude
+    private List<Answer> answers;
+
+    //TODO:
+    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "primaryKey.pollId")
+    //private List<Answer> answers;
 
     public Long getId() {
         return id;
@@ -39,5 +50,13 @@ public class Poll {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 }
