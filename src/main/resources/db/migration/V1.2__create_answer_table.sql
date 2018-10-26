@@ -5,4 +5,4 @@ create table answer (
   constraint fk_answer_users foreign key(answered_by) references users(username),
   constraint fk_answer_poll foreign key(poll_id) references poll(id),
   primary key(poll_id, answered_by)
-)
+);
