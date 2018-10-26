@@ -1,27 +1,31 @@
-import { createStore, combineReducers } from "redux";
+import { createStore } from "redux";
+
+
 const initialState = {
-  questions: []
+  questions: [],
+  userContext: {}
 };
 // Actions
-const LOGIN = "LOGIN";
-
-const SELECTROLE = "SELECTROLE";
-
 const SEND_QUESTION = "SEND_QUESTION";
 
-export function roleSelect(role) {
-  return {
-    type: SELECTROLE,
-    payload: role
-  };
+const Actions = {
+  FETCH_USER_CONTEXT: 'FETCH_USER_CONTEXT',
+  SET_USER_CONTEXT: 'SET_USER_CONTEXT',
 }
 
-export function submitLogin(email) {
+export function fetchUserContext() {
   return {
-    type: LOGIN,
-    payload: email
-  };
+    type: Actions.FETCH_USER_CONTEXT
+  }
 }
+
+function setUserContext(userContext) {
+  return {
+    type: Actions.SET_USER_CONTEXT,
+    payload: userContext
+  }
+}
+
 
 export function sendQuestion(question) {
   return {
@@ -30,40 +34,25 @@ export function sendQuestion(question) {
   };
 }
 
-// Reducers
-/*
-const rootReducer = combineReducers({
-  //loginReducer,
-  //roleSelectReducer,
-  sendQuestionReducer
-});
 
-*/
-/*
-function loginReducer(state = { login: "" }, action) {
-  switch (action.type) {
-    case LOGIN:
-      return { login: action.payload };
-    default:
-      return state;
-  }
-}
-
-function roleSelectReducer(state = { role: "" }, action) {
-  switch (action.type) {
-    case SELECTROLE:
-      return { role: action.payload };
-    default:
-      return state;
-  }
-}
-*/
-function questionReducer(state = initialState, action) {
+function rootReducer(state = initialState, action) {
   switch (action.type) {
     case SEND_QUESTION:
       return {
         ...state,
         questions: [...state.questions, action.payload]
+      };
+    case Actions.FETCH_USER_CONTEXT:
+      fetch("/api/v1/usercontext")
+        .then(response => response.json()
+          .then(userContext => store.dispatch(setUserContext(userContext)))
+          .catch(console.log)
+        );
+      return state;
+    case Actions.SET_USER_CONTEXT:
+      return {
+        ...state,
+        userContext: action.payload
       };
     default:
       return state;
@@ -71,6 +60,6 @@ function questionReducer(state = initialState, action) {
 }
 
 export const store = createStore(
-  questionReducer,
+  rootReducer, 
   window.devToolsExtension ? window.devToolsExtension() : undefined // Connect to Chrome plugin if possible
 );
