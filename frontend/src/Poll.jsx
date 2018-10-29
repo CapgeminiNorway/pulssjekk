@@ -6,7 +6,7 @@ class Poll extends Component {
   constructor(props) {
     super(props);
 
-    fetch("/api/v1/polls")
+    fetch("/api/v1/polls/unanswered")
       .then(response => {
         response.json()
           .then(polls => {
@@ -26,21 +26,17 @@ class Poll extends Component {
   }
 
   selectCurrentPoll() {
-    let polls = this.state.polls;
+    let newPolls = this.state.polls;
     let newCurrentPoll = undefined;
-    while (polls.length !== 0) {
-      let temp = polls.pop();
-      if (!temp.answers || temp.answers.length === 0) {
-        newCurrentPoll = temp;
-        break;
-      }
+    if(newPolls.length !== 0) {
+      newCurrentPoll = newPolls.pop();
     }
-    this.setState({currentPoll: newCurrentPoll, polls: polls});
+    this.setState({currentPoll: newCurrentPoll, polls: newPolls});
   }
 
   renderCurrentPoll(currentPoll) {
     if (!currentPoll) {
-      return <h1>Ingen ting å se her :-)</h1>;
+      return <h1>Ingen ting å gjøre her :-)</h1>;
     }
 
     return (<React.Fragment>
