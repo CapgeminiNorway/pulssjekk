@@ -13,6 +13,8 @@ Download the project from github. Unzip and open command prompt into the project
 
 When the project is built and is running, open your desired browser (chrome or firefox) and navigate to localhost:8080
 
+There are currently two users: user and admin. The password is the same as the username.
+
 It is recommended that you install **git bash**, **maven**, an **IDE**, and the browser extensions, **React Developer Tools** and **Redux DevTools** 
 
 # How to SHOW & SHARE     
