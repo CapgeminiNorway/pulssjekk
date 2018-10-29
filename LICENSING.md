@@ -1,13 +1,6 @@
-# Licensing of CapgeminiNorway codebase  
-
-All codebase/repos must have a license file in the base folder, the file named as LICENSE.md.  
-
-CapgeminiNorway codebase is licensed under MIT-license: (Copy/paste the text below, and remember to update correct `<YEAR>`, e.g. 2018)  
-
-```
 # The MIT License
 
-Copyright <YEAR> Capgemini Norway (Capgemini Norge AS)  
+Copyright 2018 Capgemini Norway (Capgemini Norge AS)  
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the "Software"),
@@ -26,9 +19,3 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 USE OR OTHER DEALINGS IN THE SOFTWARE.
-```
-
-### What if license file contains older date in <YEAR>?  
-
-MIT-license is free, therefore <YEAR> can be older than current date, and doesn't need to be updated every year.  
-It's required to be set only when you create your repo, e.g. 2018.  
