@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Admin from "./Admin";
 import { store, fetchUserContext } from "./store";
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
+//import * as serviceWorker from "./serviceWorker";
 import "./index.css";
 
 ReactDOM.render(
@@ -21,10 +21,19 @@ ReactDOM.render(
 );
 
 (function() {
-  store.dispatch(fetchUserContext())
+  store.dispatch(fetchUserContext());
 })();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+//serviceWorker.unregister();
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("../sw_cached_site.js")
+      .then(console.log)
+      .catch(console.log);
+  });
+}
