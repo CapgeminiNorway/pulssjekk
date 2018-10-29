@@ -14,6 +14,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,6 +37,22 @@ public class PollResource {
         }).collect(Collectors.toList());
     }
 
+    @GetMapping("/unanswered")
+    public List<Poll> getUnansweredByUser(Authentication authentication) {
+        List<Poll> all = pollRepository.findAll();
+
+        List<Poll> unanswered = new LinkedList<>();
+
+        for(Poll p : all) {
+            if(answerRepository.findByPoll(p.getId()).stream()
+                    .noneMatch(answer -> answer.getAnswerId().getAnsweredBy().equals(authentication.getName()))) {
+                unanswered.add(p);
+            }
+        }
+
+        return unanswered;
+    }
+
     @GetMapping(value = "/{id}")
     public Poll findById(@PathVariable Long id) {
         Optional<Poll> poll = pollRepository.findById(id);
@@ -46,7 +63,6 @@ public class PollResource {
 
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Poll poll, Authentication authentication) {
-        System.out.println(authentication);
         poll.setCreatedBy(authentication.getName());
         Poll saved = pollRepository.save(poll);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
